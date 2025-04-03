@@ -8,8 +8,8 @@ const {
   },
 } = config;
 
-const imagekit = new ImageKit({ publicKey, privateKey, urlEndpoint });
 console.log("--->",urlEndpoint,privateKey,publicKey)
+const imagekit = new ImageKit({ publicKey, privateKey, urlEndpoint });
 export async function GET() {
   return NextResponse.json(imagekit.getAuthenticationParameters());
 }
