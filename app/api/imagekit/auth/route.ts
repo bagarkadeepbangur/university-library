@@ -1,7 +1,7 @@
 import ImageKit from "imagekit";
 import config from "@/lib/config";
-import { NextResponse } from "next/server";
-
+// import { NextResponse } from "next/server";
+const allowedOrigin = "https://university-library-eoiywvfdt-arkadeep-bags-projects.vercel.app";
 const {
   env: {
     imagekit: { publicKey, privateKey, urlEndpoint },
@@ -19,9 +19,10 @@ export async function GET() {
   return new Response(JSON.stringify(authParams), {
     status: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*", // Replace * with specific domain in production
+      "Access-Control-Allow-Origin": allowedOrigin,
       "Access-Control-Allow-Methods": "GET, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
+      "Content-Type": "application/json",
     },
   });
 }
@@ -31,7 +32,7 @@ export async function OPTIONS() {
   return new Response(null, {
     status: 204,
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": allowedOrigin,
       "Access-Control-Allow-Methods": "GET, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     },
