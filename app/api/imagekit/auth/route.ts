@@ -24,7 +24,7 @@ export async function GET(request: Request) {
   return NextResponse.json(authParams, {
     status: 200,
     headers: {
-      "Access-Control-Allow-Origin": origin,
+      "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
       "Content-Type": "application/json",
