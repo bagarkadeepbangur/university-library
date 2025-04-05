@@ -1,6 +1,6 @@
 import ImageKit from "imagekit";
 import config from "@/lib/config";
-import { NextResponse } from "next/server";
+// import { NextResponse } from "next/server";
 // const allowedOrigin = "https://university-library-eoiywvfdt-arkadeep-bags-projects.vercel.app";
 const {
   env: {
@@ -11,36 +11,36 @@ const {
 // console.log("--->",urlEndpoint,privateKey,publicKey,process.env.NEXT_PUBLIC_IMAGEKIT_URL!)
 const imagekit = new ImageKit({ publicKey:process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!, privateKey:process.env.IMAGEKIT_PRIVATE_KEY!, urlEndpoint:process.env.NEXT_PUBLIC_IMAGEKIT_URL! });
 
-function getRequestOrigin(request: Request) {
-  const origin = request.headers.get("origin");
-  return origin || "*";
-}
-export async function GET(request: Request) {
+// function getRequestOrigin(request: Request) {
+//   const origin = request.headers.get("origin");
+//   return origin || "*";
+// }
+// export async function GET(request: Request) {
 
-  // return NextResponse.json(imagekit.getAuthenticationParameters());
-  const origin = getRequestOrigin(request);
-  const authParams =imagekit.getAuthenticationParameters()
-  console.log("oririn--->",origin)
-  return NextResponse.json(authParams, {
-    status: 200,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Content-Type": "application/json",
-    },
-  });
-}
+//   // return NextResponse.json(imagekit.getAuthenticationParameters());
+//   const origin = getRequestOrigin(request);
+//   const authParams =imagekit.getAuthenticationParameters()
+//   console.log("oririn--->",origin)
+//   return NextResponse.json(authParams, {
+//     status: 200,
+//     headers: {
+//       "Access-Control-Allow-Origin": "*",
+//       "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+//       "Access-Control-Allow-Headers": "Content-Type",
+//       "Content-Type": "application/json",
+//     },
+//   });
+// }
 
-// Handle OPTIONS (preflight)
-export async function OPTIONS(request: Request) {
-  const origin = getRequestOrigin(request);
-  return new Response(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": origin,
-      "Access-Control-Allow-Methods": "GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-    },
-  });
+export default function handler(req: Request, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*') // or your domain
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end()
+  }
+
+  const authParams = imagekit.getAuthenticationParameters()
+  return res.status(200).json(authParams)
 }

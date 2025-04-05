@@ -16,7 +16,12 @@ const {
 
 const authenticator = async () => {
   try {
-    const response = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`);
+    const response = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
