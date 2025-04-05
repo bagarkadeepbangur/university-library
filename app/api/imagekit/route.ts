@@ -1,6 +1,7 @@
 import ImageKit from "imagekit";
 import config from "@/lib/config";
 // import { NextResponse } from "next/server";
+import type { NextApiRequest, NextApiResponse } from 'next'
 // const allowedOrigin = "https://university-library-eoiywvfdt-arkadeep-bags-projects.vercel.app";
 const {
   env: {
@@ -32,7 +33,7 @@ const {
 //   });
 // }
 
-export default function handler(req: Request, res) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('ImageKit API Hit:', req.method)
   res.setHeader('Access-Control-Allow-Origin', '*') // or your domain
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
