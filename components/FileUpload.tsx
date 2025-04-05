@@ -75,7 +75,7 @@ const FileUpload = ({
 
     toast({
       title: `${type} upload failed`,
-      description: `Your ${type} could not be uploaded. Please try again.${error}`,
+      description: `Your ${type} could not be uploaded. Please try again.`,
       variant: "destructive",
     });
   };

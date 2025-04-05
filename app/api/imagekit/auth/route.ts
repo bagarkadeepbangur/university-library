@@ -20,7 +20,7 @@ export async function GET(request: Request) {
   // return NextResponse.json(imagekit.getAuthenticationParameters());
   const origin = getRequestOrigin(request);
   const authParams =imagekit.getAuthenticationParameters()
-
+  console.log("oririn--->",origin)
   return new Response(JSON.stringify(authParams), {
     status: 200,
     headers: {
