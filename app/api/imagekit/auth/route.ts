@@ -1,6 +1,6 @@
 import ImageKit from "imagekit";
 import config from "@/lib/config";
-// import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 // const allowedOrigin = "https://university-library-eoiywvfdt-arkadeep-bags-projects.vercel.app";
 const {
   env: {
@@ -21,11 +21,11 @@ export async function GET(request: Request) {
   const origin = getRequestOrigin(request);
   const authParams =imagekit.getAuthenticationParameters()
   console.log("oririn--->",origin)
-  return new Response(JSON.stringify(authParams), {
+  return NextResponse.json(authParams, {
     status: 200,
     headers: {
       "Access-Control-Allow-Origin": origin,
-      "Access-Control-Allow-Methods": "GET,POST, OPTIONS",
+      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
       "Content-Type": "application/json",
     },
