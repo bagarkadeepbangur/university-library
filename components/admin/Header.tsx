@@ -1,5 +1,6 @@
 import { Session } from "next-auth";
-
+import { Button } from "@/components/ui/button";
+import { signOut } from "@/auth";
 const Header = ({ session }: { session: Session }) => {
   return (
     <header className="admin-header">
@@ -13,6 +14,16 @@ const Header = ({ session }: { session: Session }) => {
       </div>
 
       {/*<p>Search</p>*/}
+      <form
+            action={async () => {
+            "use server";
+
+            await signOut();
+            }}
+            className="mb-10"
+          >
+            <Button>Logout</Button>
+          </form>
     </header>
   );
 };
